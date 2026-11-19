@@ -19,6 +19,22 @@ The empirical result is deliberately modest: the overlay improved drawdown,
 volatility, and turnover in the reported tests, but did not consistently improve
 returns.
 
+### [WorldQuant BRAIN Alpha Mining Platform](https://github.com/tianrunliao/worldquant-alpha-mining)
+
+Research platform with nine pluggable alpha search methods (template scan,
+neural-surrogate GP, typed-tree GP, MCTS, annealing, TPE, token-level PPO,
+MAP-Elites, and economic hypothesis cards) sharing one fail-closed pipeline for
+simulation, IS checks, correlation audit, submission, and ACTIVE verification.
+Submitted alphas and platform data are not published.
+
+### [Kaggriculture Simulation Agents](https://github.com/tianrunliao/kaggriculture-agents)
+
+Agents for a two-player farm-economy Kaggle simulation competition, ranked
+1,026th of 10,148 teams. The final agent adds opponent identification and
+reactive layers to a public Apache-2.0 chassis, validated on paired
+head-to-head panels; a second agent is a self-built numpy production and sales
+planner.
+
 ### [Batch Normalization in VGG Networks](https://github.com/tianrunliao/Deep-Learning-Project2)
 
 CIFAR-10 study comparing VGG training with and without BatchNorm across learning
