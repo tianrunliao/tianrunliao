@@ -29,7 +29,7 @@ rates, optimisers, losses, gradient statistics, and loss landscapes.
 From-scratch MLP/CNN components and a 576-configuration model study, with a
 small Flask interface for interactive experiments.
 
-### [Social Network Spam Detection](https://github.com/tianrunliao/Social-Network-Mining-Group-Assignmen)
+### [Social Network Spam Detection](https://github.com/tianrunliao/Social-Network-Mining-Group-Assignment)
 
 Graph and profile-feature pipeline comparing class-balanced classifiers and
 threshold tuning on an imbalanced labelled network dataset.
