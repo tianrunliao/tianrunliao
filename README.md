@@ -106,6 +106,55 @@ returns. The thesis claims risk shaping, not alpha.
 
 ---
 
+## NBA Dynamic Strength of Schedule
+
+[**tianrunliao/nba-analytics**](https://github.com/tianrunliao/nba-analytics)
+[![CI](https://github.com/tianrunliao/nba-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/tianrunliao/nba-analytics/actions/workflows/ci.yml)
+
+This is a pipeline built on official NBA data for the 2007-08 to 2025-26
+regular seasons. It rates teams game by game, predicts single games, models
+player availability, simulates the rest of a season and measures how hard
+each team's remaining schedule is (D-SOS). Every forecast uses only
+information available before tip-off.
+
+**Method.**
+
+1. Team strength comes from Elo, EWMA, a time-decayed opponent-adjusted
+   ridge regression and a Kalman filter. Their hyper-parameters are tuned on
+   2013-14 to 2015-16 only.
+2. A CatBoost single-game model adds rest, travel and official injury-report
+   features. Each test season is predicted by models trained on earlier
+   seasons.
+3. A joint Monte Carlo of the league simulates the remaining schedule. It
+   includes strength uncertainty, a roster prior, future injuries, the
+   official tie-breakers and the NBA Cup. A Shapley split divides D-SOS into
+   opponent strength, opponent availability, venue, own rest, own travel and
+   opponent fatigue.
+4. Every season from 2016-17 to 2025-26 is replayed from opening night and
+   after 20, 40 and 60 games.
+
+**Engineering.**
+
+1. Raw payloads are stored immutably, with a manifest of URL, fetch time and
+   sha256, and a validation suite gates the build.
+2. Tests check that every rating ignores games on or after its date. mypy
+   and ruff are clean, and CI runs on Python 3.11 and 3.12.
+3. An on-demand `live` command and a Streamlit page fetch the current
+   schedule and injury report. No NBA data is redistributed.
+
+**Result, reported honestly.** Over the 2016-17 to 2025-26 test seasons
+(11,979 games), the full CatBoost model reaches a log loss of 0.6177,
+against 0.6230 for the linear dynamic-strength baseline. Injury reports
+account for most of that gain; rest and travel add little (0.6241 → 0.6225).
+CatBoost is also less well calibrated (ECE 0.0337 against 0.0289). In the
+season replays, the error of final win totals falls from 7.53 wins on opening
+night to 2.13 after 60 games, and the 90% interval covers 90.7% of teams on
+opening night. The playoff model with health inputs does not beat
+regular-season strength alone (log loss 0.6343 against 0.6339). The results
+have not yet been compared with betting lines.
+
+---
+
 ## Other work
 
 | Project | Summary |
